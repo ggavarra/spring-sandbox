@@ -1,6 +1,7 @@
 package guru.springframework.services;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,8 +13,8 @@ public class PrimarySpanishGreetingServiceTest {
 
     @Test
     public void testSpanishGreeting(){
-        PrimarySpanishGreetingService service =new PrimarySpanishGreetingService();
+        PrimarySpanishGreetingService service =new PrimarySpanishGreetingService(new GreetingRepositoryImpl());
         String greeting =service.sayGreeting();
-        Assert.assertEquals("test",greeting);
+        Assert.assertEquals("Halo GG",greeting);
     }
 }
