@@ -1,14 +1,13 @@
-package guru.springframework;
+package gg.springframework;
 
-import guru.springframework.controllers.ConstructorInjectedController;
-import guru.springframework.controllers.GetterInjectedController;
-import guru.springframework.controllers.MyController;
-import guru.springframework.controllers.PropertyInjectedController;
+import gg.controllers.MyController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages= {"gg.controllers","gg.services"})
 public class DiDemoApplication {
 
 	public static void main(String[] args) {

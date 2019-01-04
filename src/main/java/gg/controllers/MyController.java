@@ -1,6 +1,6 @@
-package guru.springframework.controllers;
+package gg.controllers;
 
-import guru.springframework.services.GreetingService;
+import gg.services.GreetingService;
 import org.springframework.stereotype.Controller;
 
 /**

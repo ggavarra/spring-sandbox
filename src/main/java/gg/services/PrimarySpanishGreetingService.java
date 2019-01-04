@@ -1,4 +1,4 @@
-package guru.springframework.services;
+package gg.services;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Primary
-@Profile("de")
-public class PrimaryGermanGreetingService implements GreetingService {
+@Profile("es")
+public class PrimarySpanishGreetingService implements  GreetingService {
 
     private GreetingRepositoryImpl greetingRepository;
 
-    public PrimaryGermanGreetingService(GreetingRepositoryImpl greetingRepository) {
+    public PrimarySpanishGreetingService(GreetingRepositoryImpl greetingRepository) {
         this.greetingRepository = greetingRepository;
     }
 
     @Override
     public String sayGreeting() {
-        return greetingRepository.getGermanGreeting();
+        return greetingRepository.getSpanishGreeting();
     }
 }
