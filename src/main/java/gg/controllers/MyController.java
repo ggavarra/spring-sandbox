@@ -1,6 +1,8 @@
 package gg.controllers;
 
+import gg.aop.LoggingAspect;
 import gg.services.GreetingService;
+import org.aspectj.lang.annotation.Around;
 import org.springframework.stereotype.Controller;
 
 /**
