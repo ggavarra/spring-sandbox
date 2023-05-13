@@ -44,7 +44,21 @@ public class DiDemoApplication {
                 .reduce((integer, t1) -> integer + t1)
                 .collect();
 
-        System.out.println("Aggregate Amount is "+collect.get(0));
+        System.out.println("Aggregate Amount from first job is "+collect.get(0));
+
+
+        /*ExecutionEnvironment env2
+                = ExecutionEnvironment.getExecutionEnvironment();
+*/
+        DataSet<Integer> amounts1 = env.fromElements(1, 29, 40, 50);
+        int threshold1= 25;
+        List<Integer> collect1 = amounts1
+                .filter(a -> a > threshold1)
+                .reduce((integer, t1) -> integer + t1)
+                .collect();
+
+        System.out.println("Aggregate Amount from second job is "+collect1.get(0));
+
 
     }
 }
