@@ -1,25 +1,50 @@
 package gg.springframework;
 
-import gg.controllers.MyController;
+import org.apache.flink.api.java.DataSet;
+import org.apache.flink.api.java.ExecutionEnvironment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+import java.util.List;
+
 @SpringBootApplication
-@ComponentScan(basePackages= {"gg.controllers","gg.services"})
+@ComponentScan(basePackages = {"gg.controllers", "gg.services"})
 @EnableAspectJAutoProxy
 public class DiDemoApplication {
 
-	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(DiDemoApplication.class, args);
+    public static void main(String[] args) throws Exception {
+        ApplicationContext ctx = SpringApplication.run(DiDemoApplication.class, args);
 
-		MyController controller = (MyController) ctx.getBean("myController");
 
-		System.out.println(controller.hello());
-		/*System.out.println(ctx.getBean(PropertyInjectedController.class).sayHello());
-		System.out.println(ctx.getBean(GetterInjectedController.class).sayHello());
-		System.out.println(ctx.getBean(ConstructorInjectedController.class).sayHello());*/
-	}
+       /* Map<String, String> configMap = new HashMap<>();
+        Configuration configuration = Configuration.fromMap(configMap);
+        ExecutionEnvironment env = new ExecutionEnvironment(configuration);*/
+
+     /*   ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        DataSource<String> stringDataSource = env.fromCollection(Arrays.asList("a", "b", "c"));
+        stringDataSource.collect();
+        DataSink sink = new DataSink(stringDataSource, new PrintingOutputFormat(), IntegerTypeInfo.INSTANT_TYPE_INFO);
+
+        try {
+            env.execute("TransactionEnricher");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        ExecutionEnvironment env
+                = ExecutionEnvironment.getExecutionEnvironment();
+
+        DataSet<Integer> amounts = env.fromElements(1, 29, 40, 50);
+        int threshold = 30;
+        List<Integer> collect = amounts
+                .filter(a -> a > threshold)
+                .reduce((integer, t1) -> integer + t1)
+                .collect();
+
+        System.out.println("Aggregate Amount is "+collect.get(0));
+
+    }
 }
